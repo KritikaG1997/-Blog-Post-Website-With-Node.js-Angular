@@ -1,0 +1,66 @@
+<body class="hold-transition login-page">
+    <div class="login-box">
+       
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">You are only one step a way from your new password, recover your password now.
+                </p>
+
+                <form [formGroup]="otpform" action="login.html" method="post">
+                    <div class="input-group mb-3">
+                        <input type="number" id="yourOTP" formControlName="otp" class="form-control"
+                            placeholder="Enter OTP Here" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                            <div style="color:red"
+                                *ngIf="otpform.get('otp').invalid && (otpform.get('otp').dirty || otpform.get('otp').touched)">
+                                OTP is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="yourPassword" formControlName="password" class="form-control"
+                            placeholder="Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                            <div style="color:red"
+                                *ngIf="otpform.get('password').invalid && (otpform.get('password').dirty || otpform.get('password').touched)">
+                                Password is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="yourPassword" formControlName="reConfirm" class="form-control"
+                            placeholder="Confirm Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div style="color:red"
+                            *ngIf="otpform.get('reConfirm').invalid && (otpform.get('reConfirm').dirty || otpform.get('reConfirm').touched)">
+                            ReConfirm is required.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button [disabled]="otpform.invalid" (click)="otpverification()" type="submit" class="btn btn-primary btn-block">Change password</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <p class="mt-3 mb-1">
+                    <a href="/login">Login</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+</body>

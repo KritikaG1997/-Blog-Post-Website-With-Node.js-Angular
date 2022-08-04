@@ -1,0 +1,67 @@
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+
+        <div class="content-wrapper">
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card card-widget">
+                                <div class="input-group" data-widget="sidebar-search">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="search....."
+                                        id="speciesNameSearch" name="speciesNameSearch"
+                                        (keyup.enter)="getSearchResult()" [(ngModel)]="speciesName">
+                                    <div class="input-group-append">
+                                        <button style="background-color: black;" class="btn btn-sidebar">
+                                            <i class="fas fa-search fa-fw"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                    
+                                <tr
+                                    *ngFor="let obj of data | paginate: { itemsPerPage: limit, currentPage: pageNum ,totalItems: totalRecords}">
+                                    <div class="card-body">
+                                        <div class="d-flex w-100 justify-content-left">
+
+                                            <img class="img-fluid pad" [src]=" obj.user_profilePic? userImage+obj.user_profilePic:
+                                         'uploads'" alt="Photo" style="width:30%; height: 30%;">
+                                            <!-- </p> -->
+                                            
+                                            <p style="margin-left:30%">
+                                                <tr style="color: black; background-color: rgb(155, 136, 34);">User's Detail </tr>
+                                                <!-- <li class="mb-1" style="background-color: rgb(218, 147, 15);">{{obj.role}}</li> -->
+                                                <li class="mb-1" >{{obj.user_name}}</li>
+                                                <li class="mb-1" >{{obj.user_email}}</li>
+                                                <li class="mb-1" >{{obj.user_location}}</li>
+                                                <li class="mb-1" >{{obj.createdAt | date:"dd/MM/yy"
+                                                    }}
+                                                </li>
+                                            </p>
+
+                                        </div>
+                                        <br>
+                                        <button *ngIf="isAdmin()" (click)="deleteUser(obj._id)" type="button"
+                                            class="btn btn-default btn-sm"><i class="fas fa-trash" style="color: red;"></i>
+                                            Delete</button>
+
+                                    </div>
+                                </tr>
+                                <div style="position: relative;left: 35%;right: 50%;">
+                                <pagination-controls (pageChange)="onPageChange($event)"> </pagination-controls>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- ./wrapper -->
+</body>

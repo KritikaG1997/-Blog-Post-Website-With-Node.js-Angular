@@ -1,0 +1,82 @@
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="../../index2.html"><b>Admin</b>LTE</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form [formGroup]="loginform" action="../../index3.html" method="post" novalidate>
+          <div class="input-group mb-3">
+            <input type="email" id="yourEmail" formControlName="user_email" required #user_email class="form-control"
+              placeholder="Email" />
+            <!-- <input type="email" class="form-control" formControlName="user_email" placeholder="Email"> -->
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+              <div style="color:red"
+                *ngIf="loginform.get('user_email').invalid && (loginform.get('user_email').dirty || loginform.get('user_email').touched)">
+                field is required.
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input class="form-label" for="form3Example3cg" type="password" id="yourPassword"
+             formControlName="user_password" class="form-control"
+              placeholder="Password" />
+            <!-- <input type="password" class="form-control" formControlName="user_password" placeholder="Password"> -->
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+              <div style="color:red"
+                *ngIf="loginform.get('user_password').invalid && (loginform.get('user_password').dirty || loginform.get('user_password').touched)">
+                field is required.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button class="btn btn-primary w-100" [disabled]="loginform.invalid" (click)="login()" type="submit">Sign
+                In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <div class="social-auth-links text-center mb-3">
+          <p>- OR -</p>
+
+          <a href="http://localhost:8080/auth/google" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          </a>
+        </div>
+        <!-- /.social-auth-links -->
+
+        <p class="mb-1">
+          <a href="/forgetpassword">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+          <a href="/register" class="text-center">Register a new membership</a>
+        </p>
+        <p class="mb-0">
+          <a href="" class="text-center">See all posts without Login</a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</body>
+<!-- /.login-box -->

@@ -1,0 +1,91 @@
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Post Create Form</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form [formGroup]="postform" class="form-horizontal">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
+                                            <div class="col-sm-10">
+                                                <textarea rows="1" formControlName="Title" class="form-control"
+                                                  placeholder="Your Blog Title is?"></textarea>
+                                              </div>
+                                              <div style="color:red"
+                                                *ngIf="postform.get('Title').invalid && (postform.get('Title').dirty || postform.get('Title').touched)">
+                                                Title is required.
+                                              </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword3" class="col-sm-2 col-form-label">Blog</label>
+                                            <div class="col-sm-10">
+                                                <textarea rows="8" formControlName="Blog" class="form-control"
+                                                  placeholder="Create new a intresting Blog For New Genration"></textarea>
+                                              </div>
+                                              <div style="color:red"
+                                                *ngIf="postform.get('Blog').invalid && (postform.get('Blog').dirty || postform.get('Blog').touched)">
+                                                Blog is required.
+                                              </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputPassword3" class="col-sm-2 col-form-label">Picture</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" enctype="multipart/form-data" formControlName="Picture" (change)="readURL($event)" />
+                                                <img id="blah" [src]="file" alt="" class="form-control form-control-lg"
+                                                  style="height: 300px; width: 300px;" />
+                                                <div style="color:red"
+                                                *ngIf="postform.get('Picture').invalid && (postform.get('Picture').dirty || postform.get('Picture').touched)">
+                                                Picture is required.
+                                                </div>
+                                              </div>    
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" [disabled]="postform.invalid" (click)="postcreate()"
+                                         class="btn btn-info">Submit</button>
+                                    </div>
+                                    <!-- /.card-footer -->
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0
+            </div>
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+</body>

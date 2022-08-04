@@ -1,0 +1,78 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a class="brand-link">
+    <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">Blog Post Website</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div *ngFor="let obj of userData">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img [src]=" obj.user_profilePic? image+obj.user_profilePic: 'uploads'" class="img-circle elevation-2"
+            alt="User Image">
+        </div>
+        <div class="info">
+          <a href="layout/userprofile" class="d-block">{{obj.user_name}}</a>
+        </div>
+      </div>
+    </div>
+    <!-- SidebarSearch Form -->
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+       
+        <li class="nav-item">
+          <a *ngIf="loggedIn()" href="layout/homepage" class="nav-link">
+            <i class="fa fa-home" aria-hidden="true"></i> Home
+
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a *ngIf="loggedIn()" (click)="onLogOut()" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>  Sign Out
+          </a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="loggedIn()" href="layout/createpost" class="nav-link">
+            <i class="fa fa-sticky-note" aria-hidden="true"></i> Create Post
+
+          </a>
+
+        </li>
+        <li class="nav-item">
+          <a *ngIf="!loggedIn()" href="/register" class="nav-link">
+            <i class="fas fa-user-plus"></i> Add New Account
+
+          </a>
+
+        </li>
+        <li class="nav-item">
+          <a *ngIf="!loggedIn()" href="/login" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+
+          </a>
+
+        </li>
+        <li class="nav-item">
+          <a *ngIf="loggedIn()" href="layout/alluserdetails" class="nav-link">
+            <i class="fa fa-user" aria-hidden="true"></i> All Users
+
+          </a>
+
+        </li>
+
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

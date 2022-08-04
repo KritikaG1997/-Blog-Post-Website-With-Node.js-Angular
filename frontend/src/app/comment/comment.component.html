@@ -1,0 +1,92 @@
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-6">
+                            <!-- general form elements -->
+
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Post Edit Form</h3>
+                                </div>
+
+                                <div *ngFor="let j of postList;">
+
+                                    <p>{{j.Blog}}</p>
+                                    <img [src]=" j.Picture? image+j.Picture: 'uploads'" alt="Avatar" style="width:90%">
+                                </div>
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                        <div class="col-md-6">
+                            <!-- general form elements -->
+
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Post's CommentsList</h3>
+                                </div>
+                                <div class="card-body">
+                                    <tr *ngFor="let data of commentList">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <small class="text-muted">{{data.createdAt | date:"dd/MM/yy"}} </small>
+                                            <div class="comment mt-4 text-justify float-left"> <img
+                                                    src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle"
+                                                    width="40" height="40">
+
+                                                <h3 class="mb-1">{{data.Comment}} </h3>
+                                                
+                                                <small>{{data.UserId.user_name}} </small>&nbsp;
+                                                
+
+                                                <button (click)="deleteComment(data._id)" type="button" class="btn btn-default btn-sm">
+                                                    <i class="fas fa-trash" style="color: red;"></i> Delete</button>
+                                                    
+                                                </div>
+                                                
+                                        </div>
+
+                                    </tr>
+                                    <div class="card-body">
+                                        <form [formGroup]="commentform" class="form-horizontal">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label">Blog</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea rows="5" formControlName="comment"
+                                                            placeholder="Leave A Comment" class="form-control"
+                                                            style="height: 2cm;"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" (click)="commentPost()"
+                                                    class="btn btn-info">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+
+    </div>
+
+</body>

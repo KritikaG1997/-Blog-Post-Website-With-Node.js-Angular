@@ -1,0 +1,83 @@
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        <div class="content-wrapper">
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="card card-widget">
+
+                            <div class="input-group" data-widget="sidebar-search">
+                                <input class="form-control mr-sm-2" type="search" placeholder="search....."
+                                    id="speciesNameSearch" name="speciesNameSearch" (keyup.enter)="getSearchResult()"
+                                    [(ngModel)]="speciesName">
+                                <div class="input-group-append">
+                                    <button style="background-color: black;" class="btn btn-sidebar">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <tr
+                                *ngFor="let obj of data | paginate: { itemsPerPage: limit, currentPage: pageNum ,totalItems: totalRecords}">
+
+                                <li style="list-style-type: none" *ngFor="let data of obj.WhoCreated">
+                                    <div class="card-body">
+                                        <h4>Created By--
+                                            {{data.user_name}}
+                                        </h4>
+
+                                        <h4>Created On--
+                                            {{obj.createdAt | date:"dd/MM/yy"}}
+                                        </h4>
+                                        <h3 class="text-center">{{obj.Title}}</h3>
+
+                                        <img class="img-fluid pad" [src]=" obj.Picture? image+obj.Picture: 'uploads'"
+                                            alt="Photo" style="width:50%; height: 50%;">
+
+                                        <!-- <p style="margin-left:20%"> -->
+                                <li class="mb-1">{{obj.Blog}}</li>
+                                <!-- </p> -->
+
+                                <button type="button" class="btn btn-default btn-sm"><a
+                                        href="layout/commentpost/{{obj._id}}">
+                                        <i class="fas fa-edit"></i></a> Comment</button>
+                                <button type="button" (click)="likepost(obj._id)" class="btn btn-default btn-sm"><i
+                                        class="far fa-thumbs-up"></i>
+                                    Like</button>
+                                <button *ngIf="isAdmin()" (click)="deletePost(obj._id)" type="button"
+                                    class="btn btn-default btn-sm"><i class="fas fa-trash" style="color: red;"></i>
+                                    Delete</button>
+                                <span class="float-right text-muted">{{obj.Like}} likes - {{obj.Comment}}
+                                    comments</span>
+                        </div>
+                        </li>
+                        </tr>
+                        <div style="position: relative;left: 35%;right: 50%;">
+                            <pagination-controls (pageChange)="onPageChange($event)"> </pagination-controls>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- /.row -->
+
+
+        </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- /.content -->
+
+        <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    </div>
+    <!-- ./wrapper -->
+</body>

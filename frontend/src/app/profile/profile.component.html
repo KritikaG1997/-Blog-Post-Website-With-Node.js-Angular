@@ -1,0 +1,240 @@
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Profile</h1>
+                        </div>
+
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="card card-primary card-outline">
+                                <tr *ngFor="let obj of userData">
+                                    <div class="card-body box-profile">
+                                        <div class="text-center">
+                                            <img class="profile-user-img img-fluid img-circle"
+                                                [src]=" obj.user_profilePic? image+obj.user_profilePic: 'uploads'"
+                                                alt="User profile picture">
+                                        </div>
+
+                                        <h3 class="profile-username text-center">{{obj.user_name}}</h3>
+
+                                        <p class="text-muted text-center">{{userList.data.role}}</p>
+
+                                    </div>
+                                </tr>
+                                <!-- /.card-body -->
+                            </div>
+
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">About Me</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div *ngFor="let obj of userData">
+
+                                        <strong><i class="fa fa-envelope" aria-hidden="true"></i> Email</strong>
+
+                                        <p class="text-muted">
+                                            {{obj.user_email}}
+                                        </p>
+
+                                        <hr>
+
+                                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                                        <p class="text-muted">{{obj.user_location}}</p>
+
+                                        <hr>
+
+                                        <strong><i class='fas fa-wallet'></i> Wallet Amount</strong>
+
+                                        <p class="text-muted">
+                                            {{obj.walletAMount}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
+                                                data-bs-target="#profile-edit"><a
+                                                    (click)="deleteUser(userList.data._id)">Delete Account</a>
+                                            </a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline"
+                                                data-toggle="tab">Change Password</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Edit
+                                                Profile</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="active tab-pane" id="activity">
+
+                                            <div *ngFor="let data of singleUserPosts">
+                                                <h3 class="text-center">{{data.Title}}</h3>
+                                                <h4 class="text-muted" style="color: black;">CreatedAt:-{{data.createdAt |
+                                                    date:"dd/MM/yy"}}</h4>
+                                                &nbsp;
+                                                <div class="d-flex w-100 justify-content-between">
+
+                                                    <small class="mb-1">{{data.Blog}}</small>
+
+                                                    <img [src]=" data.Picture? image+data.Picture: 'uploads'"
+                                                        alt="Picture" style=" width: 20%;">
+
+
+                                                </div>
+                                                <button type="button" class="btn btn-default btn-sm"><a
+                                                        (click)="deletePost(data._id)">
+                                                        <i class="fas fa-trash" style="color: red;"></i></a>
+                                                    Delete Post</button>
+                                                    <button type="button" class="btn btn-default btn-sm"><a href="layout/editpost/{{data._id}}">
+                                                        <i class="fas fa-edit"></i></a>
+
+                                                        
+                                                    Edit Post</button>
+                                                    <span class="float-right text-muted">{{data.Like}} likes - {{data.Comment}}
+                                                        comments</span>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <form [formGroup]="changePasswordForm" *ngIf="changePasswordForm">
+                                                <div class="form-group row">
+                                                    <label for="inputName" class="col-sm-2 col-form-label">Old
+                                                        Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input formControlName="oldPassword" type="password"
+                                                            class="form-control" id="currentPassword">
+                                                    </div>
+                                                    <div style="color:red"
+                                                        *ngIf="changePasswordForm.get('oldPassword').invalid && (changePasswordForm.get('oldPassword').dirty || changePasswordForm.get('oldPassword').touched)">
+                                                        Current Password is required.
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-2 col-form-label">New Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input formControlName="user_password" type="password"
+                                                            class="form-control" id="newPassword">
+                                                    </div>
+                                                    <div style="color:red"
+                                                        *ngIf="changePasswordForm.get('user_password').invalid && (changePasswordForm.get('user_password').dirty || changePasswordForm.get('user_password').touched)">
+                                                        New Password is required.
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience"
+                                                        class="col-sm-2 col-form-label">Confirm Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input formControlName="confirm_password" type="password"
+                                                            class="form-control" id="renewPassword">
+                                                    </div>
+                                                    <div style="color:red"
+                                                        *ngIf="changePasswordForm.get('confirm_password').invalid && (changePasswordForm.get('confirm_password').dirty || changePasswordForm.get('confirm_password').touched)">
+                                                        Confirm Password is required.
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        <button type="button" class="btn btn-danger"
+                                                           
+                                                            (click)="changePassword()">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="tab-pane" id="settings">
+                                            <form [formGroup]="profileEditForm" class="form-horizontal" *ngIf="profileEditForm">
+                                                <div class="form-group row">
+                                                    <label for="inputName"
+                                                        class="col-sm-2 col-form-label">Profile</label>
+                                                    <div>
+                                                        <input type="file" class="form-control"
+                                                            formControlName="user_profile" (change)="readURL($event)">
+                                                        <img id="blah" [src]="file" alt=""
+                                                            style="height: 150px; width: 150px;"
+                                                            class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control"
+                                                            formControlName="user_name">
+                                                    </div>
+                                                    <div style="color:red"
+                                                        *ngIf="profileEditForm.get('user_name').invalid && (profileEditForm.get('user_name').dirty || profileEditForm.get('user_name').touched)">
+                                                        Your Name is required.
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience"
+                                                        class="col-sm-2 col-form-label">Gender</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control"
+                                                            formControlName="user_gender">
+                                                    </div>
+                                                    <div style="color:red"
+                                                        *ngIf="profileEditForm.get('user_gender').invalid && (profileEditForm.get('user_gender').dirty || profileEditForm.get('user_gender').touched)">
+                                                        Gender is required.
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputSkills"
+                                                        class="col-sm-2 col-form-label">Location</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control"
+                                                            formControlName="user_location">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        <button type="button" class="btn btn-danger"
+                                                            (click)="update(forList._id)">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+
+</body>
