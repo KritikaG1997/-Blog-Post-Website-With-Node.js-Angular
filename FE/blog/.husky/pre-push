@@ -1,0 +1,19 @@
+
+#!/bin/sh
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+case "$branch" in
+  main|master|develop|staging)
+    echo "You cannot push directly to the $branch branch"
+    exit 1
+    ;;
+esac
+
+pnpm check-types || exit 1
+
+base="$(git merge-base HEAD origin/develop 2>/dev/null || true)"
+
+if [ -n "$base" ]; then
+  pnpm test --changedSince="$base" --passWithNoTests || exit 1
+fi
