@@ -5,15 +5,24 @@ branch="$(git rev-parse --abbrev-ref HEAD)"
 
 case "$branch" in
   main|master|develop|staging)
-    echo "You cannot push directly to the $branch branch"
+    echo "You cannot push directly to $branch"
     exit 1
     ;;
 esac
 
+echo "Running type checks..."
 pnpm check-types || exit 1
+
+echo "Finding changes since develop..."
 
 base="$(git merge-base HEAD origin/develop 2>/dev/null || true)"
 
 if [ -n "$base" ]; then
+  echo "Running tests..."
   pnpm test --changedSince="$base" --passWithNoTests || exit 1
+else
+  echo "Warning: Could not find common commit with origin/develop."
+  exit 1
 fi
+
+echo "All pre-push checks passed!"
