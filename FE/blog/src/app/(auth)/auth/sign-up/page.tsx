@@ -28,7 +28,7 @@ export default function RegisterPage() {
         <div className="space-y-2">
           <Label htmlFor="name">Full name</Label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
+            <User className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
             <Input
               id="name"
               name="name"
@@ -44,7 +44,7 @@ export default function RegisterPage() {
           <Label htmlFor="email">Email address</Label>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
+            <Mail className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
             <Input
               id="email"
               name="email"
@@ -60,7 +60,7 @@ export default function RegisterPage() {
           <Label htmlFor="password">Password</Label>
 
           <div className="relative">
-            <LockKeyhole className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
+            <LockKeyhole className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
 
             <Input
               id="password"
@@ -70,13 +70,13 @@ export default function RegisterPage() {
               autoComplete="new-password"
               required
               minLength={8}
-              className="pl-10 pr-10"
+              className="pr-10 pl-10"
             />
 
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-700"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? (
@@ -95,7 +95,7 @@ export default function RegisterPage() {
           <Label htmlFor="confirmPassword">Confirm password</Label>
 
           <div className="relative">
-            <LockKeyhole className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
+            <LockKeyhole className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400" />
 
             <Input
               id="confirmPassword"
@@ -105,13 +105,13 @@ export default function RegisterPage() {
               autoComplete="new-password"
               required
               minLength={8}
-              className="pl-10 pr-10"
+              className="pr-10 pl-10"
             />
 
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-700"
               aria-label={
                 showConfirmPassword ? "Hide password" : "Show password"
               }
@@ -130,19 +130,19 @@ export default function RegisterPage() {
 
           <Label
             htmlFor="terms"
-            className="cursor-pointer text-sm font-normal leading-5 text-gray-500"
+            className="cursor-pointer text-sm leading-5 font-normal text-gray-500"
           >
             I agree to the{" "}
             <Link
               href="/terms"
-              className="font-medium text-primary hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               Terms of Service
             </Link>{" "}
             and{" "}
             <Link
               href="/privacy"
-              className="font-medium text-primary hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               Privacy Policy
             </Link>
@@ -161,7 +161,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="relative flex justify-center">
-          <span className="bg-white px-3 text-xs uppercase text-gray-400">
+          <span className="bg-white px-3 text-xs text-gray-400 uppercase">
             Or sign up with
           </span>
         </div>
@@ -193,7 +193,7 @@ export default function RegisterPage() {
         Already have an account?{" "}
         <Link
           href="/auth/sign-in"
-          className="font-semibold text-primary hover:underline"
+          className="text-primary font-semibold hover:underline"
         >
           Sign in
         </Link>

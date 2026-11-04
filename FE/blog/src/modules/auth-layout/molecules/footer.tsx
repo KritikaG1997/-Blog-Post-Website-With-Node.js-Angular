@@ -1,9 +1,10 @@
 async function getCurrentYear() {
-    "use cache";
-    return new Date().getFullYear();
-  }
-export default async function AuthLayout({ children }:Readonly<{ children: React.ReactNode }>) {
-  
+  "use cache";
+  return new Date().getFullYear();
+}
+export default async function AuthLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const year = await getCurrentYear();
 
   return (

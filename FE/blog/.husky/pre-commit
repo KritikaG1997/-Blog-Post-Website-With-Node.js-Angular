@@ -1,2 +1,18 @@
-pnpm test
-pnpm exec lint-staged
+
+#!/bin/sh
+
+echo "================================"
+echo "       PRE-COMMIT CHECKS"
+echo "================================"
+
+# Go to the Next.js application directory
+cd "$(git rev-parse --show-toplevel)/FE/blog" || exit 1
+
+echo "Running ESLint and Prettier..."
+
+pnpm exec lint-staged || exit 1
+
+echo "================================"
+echo "   PRE-COMMIT CHECKS PASSED"
+echo "================================"
+

@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react"
+import { useState } from "react";
 
-export const IsLogin =() =>{
-const [islogin, setIsLogin]= useState(false)
-return islogin
-}
+export const IsLogin = () => {
+  const [islogin] = useState(false);
+  return islogin;
+};
