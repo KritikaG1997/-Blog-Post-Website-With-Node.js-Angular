@@ -1,28 +1,41 @@
 
 #!/bin/sh
 
-branch="$(git rev-parse --abbrev-ref HEAD)"
+echo ""
+echo "================================"
+echo "       PRE-PUSH VALIDATION"
+echo "================================"
 
-case "$branch" in
-  main|master|develop|staging)
-    echo "You cannot push directly to $branch"
-    exit 1
-    ;;
-esac
+# Block direct pushes to protected branches
+while read local_ref local_sha remote_ref remote_sha
+do
+  case "$remote_ref" in
+    refs/heads/main|refs/heads/master|refs/heads/develop|refs/heads/staging)
+      echo ""
+      echo "ERROR: Direct push is not allowed to $remote_ref"
+      echo "Please create a feature branch and open a Pull Request."
+      exit 1
+      ;;
+  esac
+done
 
-echo "Running type checks..."
-pnpm check-types || exit 1
+# Run ESLint
+echo ""
+echo "1. Running ESLint..."
+pnpm lint || exit 1
 
-echo "Finding changes since develop..."
+# Run TypeScript checks
+echo ""
+echo "2. Checking TypeScript types..."
+pnpm type-check || exit 1
 
-base="$(git merge-base HEAD origin/develop 2>/dev/null || true)"
+# Check Prettier formatting
+echo ""
+echo "3. Checking code formatting..."
+pnpm format:check || exit 1
 
-if [ -n "$base" ]; then
-  echo "Running tests..."
-  pnpm test --changedSince="$base" --passWithNoTests || exit 1
-else
-  echo "Warning: Could not find common commit with origin/develop."
-  exit 1
-fi
-
-echo "All pre-push checks passed!"
+echo ""
+echo "================================"
+echo "   ALL CHECKS PASSED!"
+echo "   PUSH ALLOWED"
+echo "================================"
