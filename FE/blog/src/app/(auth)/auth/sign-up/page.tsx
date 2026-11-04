@@ -21,7 +21,7 @@ export default function RegisterPage() {
         </h1>
 
         <p className="text-sm text-gray-500">
-          Join Inkora and start sharing your stories.
+          Join InkWell and start sharing your stories.
         </p>
       </div>
       <form className="space-y-5">
