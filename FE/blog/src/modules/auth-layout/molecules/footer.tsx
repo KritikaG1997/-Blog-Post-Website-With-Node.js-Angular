@@ -11,7 +11,7 @@ export default async function AuthLayout({ children }:Readonly<{ children: React
       {children}
 
       <footer className="mt-8 text-center text-sm text-gray-500">
-        © {year} Inkora. All rights reserved.
+        © {year} InkWell. All rights reserved.
       </footer>
     </main>
   );
