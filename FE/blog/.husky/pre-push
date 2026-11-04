@@ -19,6 +19,9 @@ do
   esac
 done
 
+# Navigate to Next.js project
+cd "$(git rev-parse --show-toplevel)/FE/blog" || exit 1
+
 # Run ESLint
 echo ""
 echo "1. Running ESLint..."
